@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  abbrev: MyString
+  name: MyString
+  direction: 1
+  anchor: 1
+
+two:
+  abbrev: MyString
+  name: MyString
+  direction: 1
+  anchor: 1

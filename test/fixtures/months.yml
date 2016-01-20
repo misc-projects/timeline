@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  abbrev: MyString
+  name: MyString
+  length_in_days: 1
+  leaper: false
+
+two:
+  abbrev: MyString
+  name: MyString
+  length_in_days: 1
+  leaper: false
