@@ -2,8 +2,14 @@ class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
       t.belongs_to :line, index: true, foreign_key: true
-      t.integer :start # all start and end are stored as integers in the default global calendar system (converted to local in controller)
-      t.integer :end
+      t.integer :start_year
+      t.integer :end_year
+      t.integer :start_month
+      t.integer :end_month
+      t.integer :start_date
+      t.integer :end_date
+      t.integer :day
+      t.decimal :hour, precision: 5, scale: 2
       t.text :summary
       t.text :detail
       t.integer :level

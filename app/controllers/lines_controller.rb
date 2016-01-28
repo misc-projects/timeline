@@ -20,8 +20,23 @@ class LinesController < ApplicationController
 	
 	def show
 		@line = Line.find(params[:id])
+		@events = @line.events
+		@arcs = @line.arcs
+		@entities = @line.entities
 	end
 
+=begin
+this will connect to the d3.js AJAX request
+
+	def data
+		respond_to do |format|
+      format.json {
+        render json:  @line.to_json(include: { event: { only: [:name, :summary] }})
+      }
+    end
+	end
+=end
+  
 	def destroy
 		@line.destroy
 	end

@@ -1,3 +1,21 @@
 // Place all the styles related to the Calendars controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.form-tab {
+	display: inline-block
+}
+
+.tab-radio:nth-child(1):checked ~ .form-tabs-container label:nth-child(1),
+.tab-radio:nth-child(2):checked ~ .form-tabs-container label:nth-child(2),
+.tab-radio:nth-child(3):checked ~ .form-tabs-container label:nth-child(3),
+.tab-radio:nth-child(4):checked ~ .form-tabs-container label:nth-child(4) {
+  color: blue
+}
+
+.tab-radio:nth-child(1):checked ~ .form-sections-container>.form-col-1 fieldset:nth-child(1),
+.tab-radio:nth-child(2):checked ~ .form-sections-container>.form-col-1 fieldset:nth-child(2),
+.tab-radio:nth-child(3):checked ~ .form-sections-container>.form-col-1 fieldset:nth-child(3),
+.tab-radio:nth-child(4):checked ~ .form-sections-container>.form-col-1 fieldset:nth-child(4) {
+  color: blue
+}

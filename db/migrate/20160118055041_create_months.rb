@@ -4,8 +4,8 @@ class CreateMonths < ActiveRecord::Migration
       t.integer :number
       t.string :abbrev
       t.string :name
-      t.integer :length_in_days
-      t.boolean :leaper
+      t.integer :days_normal
+      t.integer :days_leap
       t.belongs_to :calendar, index: true, foreign_key: true
 
       t.timestamps null: false

@@ -1,0 +1,68 @@
+.form-container
+	%input{type: "radio", id: "tab-radio-1", name: "tab-radio", class: "tab-radio", checked: "checked"}
+	%input{type: "radio", id: "tab-radio-2", name: "tab-radio", class: "tab-radio"}
+	%input{type: "radio", id: "tab-radio-3", name: "tab-radio", class: "tab-radio"}
+	%input{type: "radio", id: "tab-radio-4", name: "tab-radio", class: "tab-radio"}
+
+	.form-tabs-container
+		%label{for: "tab-radio-1", class: "form-tab form.tab-1"} Details
+		%label{for: "tab-radio-2", class: "form-tab form.tab-2"} Eras
+		%label{for: "tab-radio-3", class: "form-tab form.tab-3"} Months
+		%label{for: "tab-radio-4", class: "form-tab form.tab-4"} Weekdays
+
+	= form_for @calendar, {html: {class: "form-sections-container"}} do |f|
+		.form-col-1
+			%fieldset.form-step.form-step-1
+				%h3 Summary
+				- # = f.label :abbrev
+				- # = f.text_field :abbrev
+				.field
+					= f.label :name
+					= f.text_field :name
+				.field
+					= f.label :leap
+					= f.check_box :leap
+				.field.disabled-field
+					- # add a JQuery or even inline JS to enable only if 'leap' checkbox is ticked
+					= f.label :leap_year_num, "Leap year interval"
+					= f.number_field :leap_year_num
+			%fieldset.form-step.form-step-2
+				- # section era: make two cocoon by default
+				%h3 Eras
+				#eras
+					= f.fields_for :eras do |era|
+						= render 'era_fields', f: era
+					.links
+						= link_to_add_association 'add era', f, :eras
+				%br
+			%fieldset.form-step.form-step-3
+				- # section month: consider two tabs, simple/advanced
+				%h3 Months
+				.field
+					= f.label :months_in_year, "Number of months"
+					= f.number_field :months_in_year
+				.field
+					= f.label :days_in_month, "Number of days in a months"
+					= f.number_field :days_in_month
+				#months
+					.sortable-container
+						= f.fields_for :months do |month|
+							= render 'month_fields', f: month
+					.links
+						= link_to_add_association 'add month', f, :months
+				%br
+			%fieldset.form-step.form-step-4
+				- # section days and weeks
+				%h3 Weekdays
+				.field
+					= f.label :week_length, "Number of days in a week"
+					= f.number_field :week_length
+				.field
+					= f.label :days_in_week, "Days in the week"
+					= f.text_area :days_in_week
+				.field
+					= f.label :hours_in_day, "Number of hours in a day"
+					= f.number_field :hours_in_day
+
+			= f.submit
+		.form-col-2
