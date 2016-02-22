@@ -7,22 +7,26 @@ class CalendarsController < ApplicationController
 
 	def new
 		@calendar = Calendar.new
+		@calendar.eras.build direction: 1, anchor: 0
+		# find a way to disable changes to direction and remove the buttons
 	end
 
 	def create
+		@calendars = current_user.calendars
 		@calendar = current_user.calendars.new(calendar_params)
-		# MOVE THIS LOGICAL TO THE VIEW
-		# nmonth = calendar_params[:months_in_year].
-		# for i in 1..nmonth do |n|
-		#		@calendar.months.build(calendar_params[:days_in_month]) <<<<<<<< attr_accessor!
-		# end
-		
-		# create a calendar before building the months?
 
-		if @calendar.save
-			redirect_to new_calendar_path
-			# calendar_params[:months_in_year].to_i.times { @calendar.months.build } # creates blank child records
+    respond_to do |format|
+      if @calendar.save
+        format.html { redirect_to @calendar, notice: 'Calendar was successfully created.' }
+        format.json { render action: 'create', status: :created, location: @calendar }
+        format.js   { render action: 'create', status: :created, location: @calendar }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @calendar.errors, status: :unprocessable_entity }
+        format.js { render status: :unprocessable_entity } # this also has action: 'create', so it sends create.js.haml to the DOM
+      end
 		end
+
 	end
 	
 
@@ -41,7 +45,6 @@ class CalendarsController < ApplicationController
 
 
 	private
-
 		def calendar_params
 			params.require(:calendar).permit( :abbrev, :name, :leap, :leap_year_num, :months_in_year, :hours_in_day, :week_length, 
 																				:days_in_week, :global_anchor, :global_scale, :days_in_month,

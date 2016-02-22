@@ -1,18 +1,17 @@
-.nested-fields.sortable
+.nested-fields.sortable.month-sortable
 	- # consider using hidden field for number, and making this class draggable and sortable
 	- # JQuery UI sortable: $(function() { $('.sortable-container').sortable({ items: '.sortable' }); });
 	- # sortable months with constant leftbar which has colours and numbers
-	.field
-		= f.label :number
-		= f.number_field :number
-	.field
-		= f.label :name
+	.field.field-inline
+		= f.number_field :number, class: "month-number-field side-sortable-field"
+	.field.field-inline
+		= f.label :name, "Name:"
 		= f.text_field :name
-	.field
-		= f.label :days_normal, "Number of days in normal year"
-		= f.number_field :days_normal
-	.field
-		= f.label :days_leap, "Number of days in leap year"
+	.field.field-inline
+		= f.label :days_normal, "Number of days in normal year:"
+		= f.number_field :days_normal, class: "month-day-field"
+	.field.field-inline
+		= f.label :days_leap, "Number of days in leap year:"
 		= f.number_field :days_leap
-	= link_to_remove_association "remove month", f
+	= link_to_remove_association "remove month", f, class: "remove-month-link"
 	

@@ -1,14 +1,14 @@
 .nested-fields
-	.field
-		= f.label :abbrev, "Abbreviation"
+	.field.field-inline
+		= f.label :abbrev, "Abbreviation:"
 		= f.text_field :abbrev
-	.field
-		= f.label :name
+	.field.field-inline
+		= f.label :name, "Name:"
 		= f.text_field :name
 	.field
-		= f.label :anchor, "Start year"
+		= f.label :anchor, "Start year:"
 		= f.number_field :anchor
 	.field
-		= f.label :direction, "Direction"
+		= f.label :direction, "Direction:"
 		= f.number_field :direction
 	= link_to_remove_association "remove era", f

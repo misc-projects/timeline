@@ -2,20 +2,36 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.form-tab {
-	display: inline-block
+
+html {
+	background-image: url(asset-path('debut_dark.png'));
 }
 
-.tab-radio:nth-child(1):checked ~ .form-tabs-container label:nth-child(1),
-.tab-radio:nth-child(2):checked ~ .form-tabs-container label:nth-child(2),
-.tab-radio:nth-child(3):checked ~ .form-tabs-container label:nth-child(3),
-.tab-radio:nth-child(4):checked ~ .form-tabs-container label:nth-child(4) {
-  color: blue
+// consider only disable in modal
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
-.tab-radio:nth-child(1):checked ~ .form-sections-container>.form-col-1 fieldset:nth-child(1),
-.tab-radio:nth-child(2):checked ~ .form-sections-container>.form-col-1 fieldset:nth-child(2),
-.tab-radio:nth-child(3):checked ~ .form-sections-container>.form-col-1 fieldset:nth-child(3),
-.tab-radio:nth-child(4):checked ~ .form-sections-container>.form-col-1 fieldset:nth-child(4) {
-  color: blue
+
+#new-calendar-modal {
+	min-width: 400px;
+}
+
+
+@media (min-width: 768px) {
+	#new-calendar-modal {
+		width: 768px;
+	}
+}
+
+@media (min-width: 800px) {
+	#new-calendar-modal {
+		width: 800px;
+	}
+}
+
+.month-number-field {
+	width: 5px;
 }
