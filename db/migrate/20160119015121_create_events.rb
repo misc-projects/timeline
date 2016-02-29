@@ -2,6 +2,8 @@ class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
       t.belongs_to :line, index: true, foreign_key: true
+      t.string :name
+      t.integer :start_era
       t.integer :start_year
       t.integer :end_year
       t.integer :start_month

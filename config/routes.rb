@@ -4,9 +4,14 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root to: "calendars#index"
+  root to: "lines#index"
 
   resources :calendars
+  resources :lines do
+    resources :events, shallow: true
+    resources :arcs, shallow: true
+    resources :entities, shallow: true
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

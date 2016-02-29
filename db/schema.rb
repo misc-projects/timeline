@@ -46,12 +46,12 @@ ActiveRecord::Schema.define(version: 20160119022354) do
     t.integer  "months_in_year"
     t.integer  "hours_in_day"
     t.integer  "week_length"
-    t.text     "days_in_week",   default: [],              array: true
+    t.text     "days_in_week",                array: true
     t.decimal  "year_length"
     t.integer  "global_anchor"
     t.integer  "global_scale"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "calendars", ["abbrev", "user_id"], name: "index_calendars_on_abbrev_and_user_id", using: :btree
@@ -85,7 +85,8 @@ ActiveRecord::Schema.define(version: 20160119022354) do
   create_table "eras", force: :cascade do |t|
     t.string   "abbrev"
     t.string   "name"
-    t.integer  "direction"
+    t.integer  "number"
+    t.boolean  "direction"
     t.integer  "anchor"
     t.integer  "calendar_id"
     t.datetime "created_at",  null: false
@@ -107,6 +108,8 @@ ActiveRecord::Schema.define(version: 20160119022354) do
 
   create_table "events", force: :cascade do |t|
     t.integer  "line_id"
+    t.string   "name"
+    t.integer  "start_era"
     t.integer  "start_year"
     t.integer  "end_year"
     t.integer  "start_month"

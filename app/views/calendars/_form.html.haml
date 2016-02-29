@@ -16,10 +16,9 @@
 			.tab-label Months
 			.tab-label Weekdays
 
-
 	= form_for @calendar, data: {remote: true}, html: {class: "form-sections-container"} do |f|
 		.form-col-1
-			%fieldset.form-step.form-step-1
+			.form-step.form-step-1
 				%h3 New calendar
 				- # = f.label :abbrev
 				- # = f.text_field :abbrev
@@ -36,7 +35,7 @@
 				.button-container 
 					%button{type: "button", class: "option-button next-step-button"}
 						Next
-			%fieldset.form-step.form-step-2
+			.form-step.form-step-2
 				- # section era: make two cocoon by default
 				%h3 Eras
 				#eras
@@ -50,26 +49,33 @@
 						Back
 					%button{type: "button", class: "option-button next-step-button"}
 						Next
-			%fieldset.form-step.form-step-3
+			.form-step.form-step-3
 				- # section month: consider two tabs, simple/advanced
 				%h3 Months
-				.simple-months
-					.field.field-inline
+				.simple-months{class: ("hidden" unless @calendar.new_record?)}
+					.field.field-block
 						= f.label :months_in_year, "Number of months:"
 						= f.number_field :months_in_year
-					.field.field-inline
-						= f.label :days_in_month, "Number of days in a months:"
+					.field.field-block
+						= f.label :days_in_month, "Number of days in a standard month:"
 						= f.number_field :days_in_month
 					%button{type: "button", class: "option-button", id:"populate-month-button"}
 						- # on click, gets number of months + number of days and switches to the hidden months below
 						Populate
-				#months.hidden
+				#months{class: ("hidden" if @calendar.new_record?)}
+					.months-heading
+						%ul.level-1
+							%li Name
+							%li Number of days
+						%ul.level-2
+							%li Standard
+							%li Leap
 					.sortable-container
 						= f.fields_for :months do |month|
 							= render 'month_fields', f: month, class: "sortable-container"
 						.links
-							= link_to_add_association 'add month', f, :months, class: "add-month-link"
-						%button{type: "button", class: "option-button", id: "reset-month-button"}
+							= link_to_add_association "image_tag('add_month.png')", f, :months, class: "add-month-link"
+						%button{type: "button", class: ["option-button", ("hidden" unless @calendar.new_record?)], id: "reset-month-button"}
 							- # give warning that this will delete months
 							Reset
 				.button-container
@@ -77,7 +83,7 @@
 						Back
 					%button{type: "button", class: "option-button next-step-button"}
 						Next
-			%fieldset.form-step.form-step-4
+			.form-step.form-step-4
 				- # section days and weeks
 				%h3 Weekdays
 				.field
@@ -85,7 +91,8 @@
 					= f.number_field :week_length
 				.field
 					= f.label :days_in_week, "Names of days in the week:"
-					= f.text_area :days_in_week
+					= text_field_tag "calendar[days_in_week][]"
+					-# button to add another text_field_tag "calendar[days_in_week][]"
 				.field
 					= f.label :hours_in_day, "Number of hours in a day:"
 					= f.number_field :hours_in_day
@@ -93,5 +100,3 @@
 					%button{type: "button", class: "option-button back-step-button"}
 						Back
 					= f.submit
-		.form-col-2
-			This is column two

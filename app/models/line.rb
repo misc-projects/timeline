@@ -6,4 +6,6 @@ class Line < ActiveRecord::Base
 	has_many :entities
 	has_many :tags
 
+	validates :name, presence: true
+	validates_associated :calendar
 end

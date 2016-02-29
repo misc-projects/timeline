@@ -2,6 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// COLOURS
+$heading-text: #8a92a5;
+$background-blue: #17aaca;
+$button-muted: #a0afb2;
+
+$field-background: #edf0f6;
+$field-border: #eef1f8;
+$field-text: #6b7282;
+
 
 html {
 	background-image: url(asset-path('debut_dark.png'));
@@ -14,12 +23,11 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 
-
 #new-calendar-modal {
 	min-width: 400px;
 }
 
-
+/*
 @media (min-width: 768px) {
 	#new-calendar-modal {
 		width: 768px;
@@ -31,7 +39,45 @@ input[type=number]::-webkit-outer-spin-button {
 		width: 800px;
 	}
 }
+*/
 
-.month-number-field {
-	width: 5px;
+#months {
+	.field {
+		margin: 0;
+
+		input {
+			margin: 2px 0;
+
+			&.month-number-field[type="number"] {
+				text-align: center;
+				width: 10px;
+				padding: 10px 10px 10px 6px;
+				border: 2px solid #17aaca;
+				background-color: #17aaca;
+				border-radius: 3px 0 0 3px;
+				color: #dddddd;
+				font-size: 0.88em;
+				min-width: 60%;
+			}
+
+			&.month-name-field[type="text"] {
+				border-radius: 0px 3px 3px 0px;
+			}
+
+		}
+	}
+
+	.months-heading {
+		color: $heading-text;
+		font-family: 'Economica';
+		text-transform: uppercase;
+		font-weight: bold;
+		padding: 0;
+
+		li {
+			display: inline-block;
+			list-style: none;
+		}
+	}
+
 }

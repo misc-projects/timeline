@@ -9,7 +9,7 @@ class CreateCalendars < ActiveRecord::Migration
       t.integer :months_in_year
       t.integer :hours_in_day
       t.integer :week_length
-      t.text :days_in_week, array: true, default: [] # length must be equal to week_length
+      t.text :days_in_week, array: true # length must be equal to week_length
       t.decimal :year_length
 
       t.integer :global_anchor

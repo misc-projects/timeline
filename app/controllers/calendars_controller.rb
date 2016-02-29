@@ -2,7 +2,6 @@ class CalendarsController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@calendars = current_user.calendars
 	end
 
 	def new
@@ -12,7 +11,6 @@ class CalendarsController < ApplicationController
 	end
 
 	def create
-		@calendars = current_user.calendars
 		@calendar = current_user.calendars.new(calendar_params)
 
     respond_to do |format|
@@ -23,7 +21,7 @@ class CalendarsController < ApplicationController
       else
         format.html { render action: 'new' }
         format.json { render json: @calendar.errors, status: :unprocessable_entity }
-        format.js { render status: :unprocessable_entity } # this also has action: 'create', so it sends create.js.haml to the DOM
+        format.js { render json: @calendar.errors, status: :unprocessable_entity }
       end
 		end
 
@@ -47,8 +45,9 @@ class CalendarsController < ApplicationController
 	private
 		def calendar_params
 			params.require(:calendar).permit( :abbrev, :name, :leap, :leap_year_num, :months_in_year, :hours_in_day, :week_length, 
-																				:days_in_week, :global_anchor, :global_scale, :days_in_month,
-																				eras_attributes: [:abbrev, :name, :direction, :anchor],
+																			 	:global_anchor, :global_scale, :days_in_month,
+																			 	days_in_week: [],
+																				eras_attributes: [:number, :abbrev, :name, :direction, :anchor],
 																				months_attributes: [:id, :number, :abbrev, :name, :days_normal, :days_leap, :_destroy])
 		end
 end
