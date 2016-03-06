@@ -1,0 +1,12 @@
+%ul.errors
+
+= link_to 'New Calendar', new_calendar_path, remote: true
+= link_to 'New Timeline', new_line_path, remote: true
+
+.timelines-container
+	- @lines.each do |line|
+		.timeline-thumbnail
+			= line.name
+
+
+#form-modal.modal.fade

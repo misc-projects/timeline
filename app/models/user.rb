@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :lines
   has_many :calendars
+  has_many :tags
   
   after_create :create_default_calendar
 

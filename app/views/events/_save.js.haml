@@ -1,0 +1,8 @@
+- if @event.errors.any?
+	- @event.errors.each do |message|
+		$('input[name=\'event[' + "#{ message }" + ']\']').addClass('has-error');
+- else
+	$("#form-modal").modal("hide")
+
+
+- # use this instead: https://www.alfajango.com/blog/rails-3-remote-links-and-forms/

@@ -5,7 +5,6 @@ class Calendar < ActiveRecord::Base
 
 	belongs_to :user
 
-
 	validates :name, presence: true
 	validate do
     check_months_number

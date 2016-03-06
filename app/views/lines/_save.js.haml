@@ -1,0 +1,8 @@
+- if @line.errors.any?
+	- @line.errors.each do |message|
+		$('input[name=\'timeline[' + "#{ message }" + ']\']').addClass('has-error');
+- else
+	$("#form-modal").modal("hide")
+
+
+- # use this instead: https://www.alfajango.com/blog/rails-3-remote-links-and-forms/

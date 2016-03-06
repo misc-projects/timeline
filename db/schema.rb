@@ -154,14 +154,14 @@ ActiveRecord::Schema.define(version: 20160119022354) do
   add_index "months", ["calendar_id"], name: "index_months_on_calendar_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
-    t.integer  "line_id"
+    t.integer  "user_id"
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "tags", ["line_id"], name: "index_tags_on_line_id", using: :btree
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  add_index "tags", ["user_id"], name: "index_tags_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -195,5 +195,5 @@ ActiveRecord::Schema.define(version: 20160119022354) do
   add_foreign_key "lines", "calendars"
   add_foreign_key "lines", "users"
   add_foreign_key "months", "calendars"
-  add_foreign_key "tags", "lines"
+  add_foreign_key "tags", "users"
 end

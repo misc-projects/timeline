@@ -1,0 +1,16 @@
+.form-container
+	= form_for @line, data: {remote: true}, html: {class: "form-sections-container"} do |f|
+		%h3 New timeline
+		- # = f.label :abbrev
+		- # = f.text_field :abbrev
+		.field.field-block
+			= f.label :name, "Name:"
+			= f.text_field :name
+		.field.field-inline
+			= f.label :calendar_id, "Calendar:"
+			= f.collection_select :calendar_id, @calendars, :id, :name 
+		.field.field-inline
+			- # TODO stackable modal - $("#form-modal").modal("hide")
+			= link_to 'New Calendar', new_calendar_path, remote: true
+		.button-container
+			= f.submit "Create Timeline"

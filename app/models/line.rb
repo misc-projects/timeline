@@ -4,7 +4,6 @@ class Line < ActiveRecord::Base
 	has_many :events
 	has_many :arcs
 	has_many :entities
-	has_many :tags
 
 	validates :name, presence: true
 	validates_associated :calendar

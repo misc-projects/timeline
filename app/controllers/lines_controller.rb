@@ -32,7 +32,7 @@ class LinesController < ApplicationController
 		@events = @line.events
 		@arcs = @line.arcs
 		@entities = @line.entities
-		@tags = @line.tags
+		@tags = current_user.tags
 	end
 
 	def events_data
@@ -64,6 +64,7 @@ this will connect to the d3.js AJAX request
 
 
 		def events_jsonify
+			# need event
 			# @events
 			#     t.integer  "start_year"
     	# 		t.integer  "end_year"

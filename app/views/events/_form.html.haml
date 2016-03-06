@@ -1,0 +1,29 @@
+.form-container
+	= form_for [@line, Event.new], data: {remote: true}, html: {class: "form-sections-container"} do |f|
+		%h3 New event
+		.field.field-block
+			= f.label :name, "Name:"
+			= f.text_field :name
+		.field.field-block
+			= f.label :summary, "Summary:"
+			= f.text_field :summary
+		.field.field-block
+			= f.label :start_era_id, "Era:"
+			= f.collection_select :start_era_id, @eras, :id, :abbrev
+		.field.field-block
+			= f.label :start_date, "Start date:"
+			.combined-fields
+				= f.number_field :start_date
+				= f.number_field :start_month
+				= f.number_field :start_year
+		.field.field-block
+			= f.label :start_date, "End date:"
+			.combined-fields
+				= f.number_field :end_date
+				= f.number_field :end_month
+				= f.number_field :end_year
+		.field.field-block
+			= f.label :all_tags, "Tags:"
+			= f.text_field :all_tags, class: "tag-field", id: "event-tag-field"
+		.button-container 
+			= f.submit
