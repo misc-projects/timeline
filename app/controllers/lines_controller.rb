@@ -20,9 +20,8 @@ class LinesController < ApplicationController
         format.json { render action: 'create', status: :created, location: @line }
         format.js   { render action: 'create', status: :created, location: @line }
       else
-        format.html { render action: 'new' }
         format.json { render json: @line.errors, status: :unprocessable_entity }
-        format.js { render status: :unprocessable_entity } # this also has action: 'create', so it sends create.js.haml to the DOM
+        format.js { render json: @line.errors, status: :unprocessable_entity } # this also has action: 'create', so it sends create.js.haml to the DOM
       end
 		end
 	end

@@ -26,7 +26,7 @@ class Calendar < ActiveRecord::Base
 
     def check_months_number
       unless months_count_valid?
-        errors.add(:base, :eras_too_short, count: 1)
+        errors.add(:months_in_year, "need at least 1 month")
       end
     end
 
@@ -37,7 +37,7 @@ class Calendar < ActiveRecord::Base
 
     def check_eras_number
       unless eras_count_valid?
-        errors.add(:base, :eras_too_short, count: 1)
+        errors.add(:eras, "need at least 1 era")
       end
     end
 end

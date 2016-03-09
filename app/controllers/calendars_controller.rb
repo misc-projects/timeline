@@ -19,9 +19,8 @@ class CalendarsController < ApplicationController
         format.json { render action: 'create', status: :created, location: @calendar }
         format.js   { render action: 'create', status: :created, location: @calendar }
       else
-        format.html { render action: 'new' }
         format.json { render json: @calendar.errors, status: :unprocessable_entity }
-        format.js { render json: @calendar.errors, status: :unprocessable_entity }
+        format.js { render json: { model: 'calendar', error: @calendar.errors }, status: :unprocessable_entity }
       end
 		end
 

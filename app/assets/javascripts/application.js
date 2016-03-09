@@ -15,5 +15,6 @@
 //= require jquery-ui
 //= require turbolinks
 //= require d3
+//= require form
 //= require cocoon
 //= require_tree .

@@ -22,7 +22,6 @@ class Event < ActiveRecord::Base
   validates :name, presence: true
   validates :start_era, presence: true
   validates :start_year, presence: true
-  validates :start_month, numericality: { greater_than: 0 }
 
   after_validation :check_dates
 

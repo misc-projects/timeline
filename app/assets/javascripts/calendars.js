@@ -1,31 +1,4 @@
 $(document).ready(function() {
-	console.log("loaded")
-	// next button + validate
-		// calendar name can't be empty
-	// next
-		// era names can't be empty
-		// must have at least 2 eras, with direction
-	// next
-		// must have at least one month, with number of days
-	// next
-		// must have number of days + hours
-		
-	// populate months
-	// TODO slider
-
-
-	function multiStepForm() {
-		$("body").on('click', ".next-step-button", function() {
-			// insert validation here
-			$("input[name=accordion-checkbox]").next().prop("checked", true);
-		});
-
-		$("body").on('click', ".back-step-button", function() {
-
-			// insert validation here
-			$("input[name=accordion-checkbox]").prev().prop("checked", true);
-		});
-	}
 
 	function monthFields() {
 		var ndays = $("#calendar_days_in_month").val()
@@ -96,7 +69,6 @@ $(document).ready(function() {
 	
 	};
 
-	multiStepForm();
 	monthFields();
 
 });

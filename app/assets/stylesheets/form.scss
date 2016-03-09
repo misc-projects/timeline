@@ -8,6 +8,8 @@ $background-blue: #6dc5f2;
 $background-soft-blue: #c6e1ec;
 $button-muted: #a0afb2;
 $text-bg-soft-blue: #3d7489;
+$background-soft-red: #ef9ea3;
+$text-bg-soft-red: #911515;
 
 $field-background: #edf0f6;
 $field-border: #eef1f8;
@@ -88,6 +90,18 @@ $field-heading-text: #8a92a5;
 			border-color: $background-blue;
 			outline-color: $background-blue;
 		}
+
+		&.has-error {
+			border: 1px solid red;
+			outline-color: red;
+			box-shadow: 0 0 3px red
+		}
+	}
+
+	.error-message {
+		font-family: 'Open Sans';
+		font-size: 0.6em;
+		color: red;
 	}
 
 	.combined-fields > input {
@@ -101,6 +115,8 @@ $field-heading-text: #8a92a5;
 	.field input[type="number"] {
 		width: 50px; 
 	}
+
+
 
 	.back-step-button {
 		background-color: $button-muted;
@@ -157,6 +173,15 @@ $field-heading-text: #8a92a5;
 
 		&:hover {
 			background: #fff;
+		}
+
+		&.error-accordion-label {
+			background: $background-soft-red;
+			color: $text-bg-soft-red;
+			text-shadow: 1px 1px 1px rgba(255,255,255, 0.5);
+			box-shadow:
+				0px 0px 0px 1px rgba(155,155,155,0.3),
+				0px 2px 2px rgba(0,0,0,0.1);
 		}
 	}
 
