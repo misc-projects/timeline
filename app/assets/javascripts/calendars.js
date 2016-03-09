@@ -16,15 +16,14 @@ $(document).ready(function() {
 
 	function multiStepForm() {
 		$("body").on('click', ".next-step-button", function() {
-
 			// insert validation here
-			$("input[name=tab-radio]:checked").next().prop("checked", true);
+			$("input[name=accordion-checkbox]").next().prop("checked", true);
 		});
 
 		$("body").on('click', ".back-step-button", function() {
 
 			// insert validation here
-			$("input[name=tab-radio]:checked").prev().prop("checked", true);
+			$("input[name=accordion-checkbox]").prev().prop("checked", true);
 		});
 	}
 

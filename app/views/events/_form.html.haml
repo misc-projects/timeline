@@ -1,29 +1,55 @@
-.form-container
+.form-container.accordion-container
 	= form_for [@line, Event.new], data: {remote: true}, html: {class: "form-sections-container"} do |f|
-		%h3 New event
-		.field.field-block
-			= f.label :name, "Name:"
-			= f.text_field :name
-		.field.field-block
-			= f.label :summary, "Summary:"
-			= f.text_field :summary
-		.field.field-block
-			= f.label :start_era_id, "Era:"
-			= f.collection_select :start_era_id, @eras, :id, :abbrev
-		.field.field-block
-			= f.label :start_date, "Start date:"
-			.combined-fields
-				= f.number_field :start_date
-				= f.number_field :start_month
-				= f.number_field :start_year
-		.field.field-block
-			= f.label :start_date, "End date:"
-			.combined-fields
-				= f.number_field :end_date
-				= f.number_field :end_month
-				= f.number_field :end_year
-		.field.field-block
-			= f.label :all_tags, "Tags:"
-			= f.text_field :all_tags, class: "tag-field", id: "event-tag-field"
+		.form-accordion-step
+			%input{type: "checkbox", id: "accordion-checkbox-1", name: "accordion-checkbox", class: "accordion-checkbox", checked: "checked"}
+			%label{for: "accordion-checkbox-1", class: "accordion-label"} Event details
+			.form-accordion-step-content
+				.form-accordion-step-fieldset
+					.field.field-block
+						= f.label :name, "Name:"
+						= f.text_field :name
+					.field.field-block.form-subsection
+						= f.label :all_arcs, "Arcs:"
+						= f.fields_for :all_arcs do |arc|
+							.field.field-block
+								= arc.collection_select nil, @arcs, :id, :name, {include_blank: "Please select", selected: 1}
+							.field.field-block
+								= arc.collection_select nil, @arcs, :id, :name, {include_blank: "Please select", selected: 1}
+					.field.field-block
+						= f.label :all_tags, "Tags:"
+						= f.text_field :all_tags, class: "tag-field hidden", id: "event-tag-field"
+		.form-accordion-step
+			%input{type: "checkbox", id: "accordion-checkbox-2", name: "accordion-checkbox", class: "accordion-checkbox"}
+			%label{for: "accordion-checkbox-2", class: "accordion-label"} Dates
+			.form-accordion-step-content
+				.form-accordion-step-fieldset
+					.field.field-block
+						= f.label :start_era_id, "Era:"
+						= f.collection_select :start_era_id, @eras, :id, :abbrev
+					.field.field-block
+						= f.label :start_date, "Start date:"
+						.combined-fields
+							= f.number_field :start_date
+							= f.number_field :start_month
+							= f.number_field :start_year
+					.field.field-block
+						= f.label :start_date, "End date:"
+						.combined-fields
+							= f.number_field :end_date
+							= f.number_field :end_month
+							= f.number_field :end_year
+		.form-accordion-step
+			%input{type: "checkbox", id: "accordion-checkbox-3", name: "accordion-checkbox", class: "accordion-checkbox"}
+			%label{for: "accordion-checkbox-3", class: "accordion-label"} Entities
+			.form-accordion-step-content
+				.form-accordion-step-fieldset
+					.field.field-block.form-subsection
+						= f.fields_for :all_entities do |entity|
+							.field.field-block
+								= entity.collection_select nil, @entities, :id, :name, {include_blank: "Please select", selected: 1}
+							.field.field-block
+								= entity.collection_select nil, @entities, :id, :name, {include_blank: "Please select", selected: 1}
 		.button-container 
 			= f.submit
+
+

@@ -4,6 +4,9 @@ class EventsController < ApplicationController
 	def new
 		@line = Line.find(params[:line_id])
 		@eras = @line.calendar.eras
+		@arcs = @line.arcs
+		@entities = @line.entities
+		@tags = current_user.tags
 	end
 
 	def create
@@ -30,7 +33,7 @@ class EventsController < ApplicationController
 	private
 
 		def event_params
-			params.require(:event).permit( :name, :start_era_id, :start_year, :end_year, 
+			params.require(:event).permit( :line_id, :name, :start_era_id, :start_year, :end_year, 
 																			:start_month, :end_month, :start_date, :end_date,
 																			:day, :hour, :summary, :detail, :level, :type, :complete,
 																			:all_tags, :all_arcs, :all_entities,

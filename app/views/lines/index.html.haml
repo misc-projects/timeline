@@ -6,7 +6,7 @@
 .timelines-container
 	- @lines.each do |line|
 		.timeline-thumbnail
-			= line.name
+			= link_to line.name, line_path(line.id)
 
 
 #form-modal.modal.fade

@@ -3,8 +3,11 @@
 
 // COLOURS
 $heading-text: #6d727c;
-$background-blue: #17aaca;
+$background-bright-blue: #17aaca;
+$background-blue: #6dc5f2;
+$background-soft-blue: #c6e1ec;
 $button-muted: #a0afb2;
+$text-bg-soft-blue: #3d7489;
 
 $field-background: #edf0f6;
 $field-border: #eef1f8;
@@ -26,21 +29,29 @@ $field-heading-text: #8a92a5;
 	}
 
 	input[type="submit"], button {
+		font-family: 'Economica';
+		font-weight: bold;
+		text-transform: uppercase;
 		padding: 10px;
-		border-radius: 3px;
+		// border-radius: 3px;
 		border: none;
-		background-color: $background-blue;
-		color: #ffffff;
+		background-color: $background-bright-blue;
+		color: white;
 
+		&:hover {
+			background-color: $background-blue;
+			color: white;
+		}
 		&.option-button {
 			width: 100px;
 		}
 
 		&:focus {
 			border-color: $background-blue;
-			outline-color: $background-blue;			
+			outline-color: $background-blue;		
 		}
 	}
+
 
 	.field label {
 		font-family: 'Economica', sans-serif;
@@ -69,7 +80,7 @@ $field-heading-text: #8a92a5;
 		margin: 10px 0;
 		background-color: $field-background;
 		border: 1px solid $field-border;
-		border-radius: 3px;
+		// border-radius: 3px;
 		color: $field-text;
 
 		&:focus {
@@ -97,6 +108,7 @@ $field-heading-text: #8a92a5;
 
 	.next-step-button {
 		float: right;
+		margin-bottom: 30px;
 	}
 
 
@@ -105,90 +117,92 @@ $field-heading-text: #8a92a5;
 		width: 100%; 
 	}
 
-	/*
-	.form-col-2 {
-		position: absolute;
-		top: 30px;
-		right: 30px;
-		max-width: 33%;
-	}
-	*/
-	// for multistep forms
-	.form-step {
-		min-height: 300px;
-		display: none;
-	}
-
-	.form-progress-bar {
-		position: absolute;
-		top: -60px;
-		width: 100%;
+	ul.tagit {
+		width: 80%;
+		padding: 5px 10px;
+		margin: 10px 0;
+		background-color: $field-background;
+		border: 1px solid $field-border;
+		border-radius: 3px;
+		color: $field-text;
+		
+		.ui-icon {
+			background-color: red; // create own image
+		}	
 	}
 
-	@media (max-width: 768px) {
-		.form-progress-bar {
-			display: none;
+	// removes padding if accordion form - takes precedence over 30px default padding
+	&.accordion-container {
+		padding: 0;
+	}
+
+	.form-accordion-step label.accordion-label {
+		font-family: 'Economica', 'Arial Narrow', Arial, sans-serif;
+		font-weight: bold;
+		text-transform: uppercase;
+		padding: 5px 20px;
+		position: relative;
+		z-index: 20;
+		display: block;
+		cursor: pointer;
+		color: #777;
+		text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+		line-height: 33px;
+		font-size: 19px;
+		background: #eaeaea;
+		box-shadow: 
+			0px 0px 0px 1px rgba(155,155,155,0.3), 
+			1px 0px 0px 0px rgba(255,255,255,0.9) inset, 
+			0px 2px 2px rgba(0,0,0,0.1);
+
+		&:hover {
+			background: #fff;
 		}
 	}
 
-	.form-tabs-container {
-		padding: 0 0px;
-		padding-left: 20px;
-		width: 100%;
-	}
 
-	.tab-labels-container {
-		margin: 5px 0 0 0;
-		padding-left: 20px;
-		width: 100%;
-		color: white;
-	}
-
-	.tab-label {
-		display: inline-block;
-		margin: 0 10px;
-		width: 100px;
-		font-size: 0.60em;
-		text-transform: uppercase;
-		text-align: center;
-	}
-
-	.form-tab {
-		display: inline-block;
-		height: 20px;
-		width: 20px;
-		margin: 0 50px;
-		line-height: 20px;
-		text-align: center;
-		font-size: 0.8em;
-		background-color: white;
-		border-radius: 3px;
-	}
-
-	.tab-radio {
+	input.accordion-checkbox {
 		display: none;
+
+		&:checked + label {
+			background: $background-soft-blue;
+			color: $text-bg-soft-blue;
+			text-shadow: 0px 1px 1px rgba(255,255,255, 0.6);
+			box-shadow: 
+				0px 0px 0px 1px rgba(155,155,155,0.3), 
+				0px 2px 2px rgba(0,0,0,0.1);
+
+			&:hover {
+				background-color: $background-blue;
+				color: white;
+			}
+		}
 	}
 
-	.tab-radio:nth-child(1):checked ~ .form-progress-bar .form-tabs-container label:nth-child(1),
-	.tab-radio:nth-child(2):checked ~ .form-progress-bar .form-tabs-container label:nth-child(2),
-	.tab-radio:nth-child(3):checked ~ .form-progress-bar .form-tabs-container label:nth-child(3),
-	.tab-radio:nth-child(4):checked ~ .form-progress-bar .form-tabs-container label:nth-child(4) {
-	  background-color: $background-blue;
-	  color: white;
+	.form-accordion-step-content {
+		box-sizing: border-box;
+		background: rgba(255, 255, 255, 0.5);
+		margin-top: -1px;
+		overflow: hidden;
+		height: 0px;
+		position: relative;
+		z-index: 10;
+		transition: 
+			height 0.3s ease-in-out, 
+			box-shadow 0.6s linear;
 	}
 
-	.tab-radio:nth-child(1):checked ~ .form-sections-container>.form-col-1 .form-step:nth-child(1),
-	.tab-radio:nth-child(2):checked ~ .form-sections-container>.form-col-1 .form-step:nth-child(2),
-	.tab-radio:nth-child(3):checked ~ .form-sections-container>.form-col-1 .form-step:nth-child(3),
-	.tab-radio:nth-child(4):checked ~ .form-sections-container>.form-col-1 .form-step:nth-child(4),
-	.tab-radio:nth-child(1):checked ~ .form-sections-container>.form-col-2 div:nth-child(1),
-	.tab-radio:nth-child(2):checked ~ .form-sections-container>.form-col-2 div:nth-child(2),
-	.tab-radio:nth-child(3):checked ~ .form-sections-container>.form-col-2 div:nth-child(3),
-	.tab-radio:nth-child(4):checked ~ .form-sections-container>.form-col-2 div:nth-child(4) {
-	  display: block;
+	input:checked ~ .form-accordion-step-content {
+		height: auto;
+		transition: 
+			height 0.5s ease-in-out, 
+			box-shadow 0.1s linear;
+		box-shadow: 0px 0px 0px 1px rgba(155,155,155,0.3);
 	}
 
-
+	.form-accordion-step-fieldset {
+		padding: 30px;
+	}
 }
 
 
