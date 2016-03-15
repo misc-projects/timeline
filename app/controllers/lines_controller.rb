@@ -20,8 +20,8 @@ class LinesController < ApplicationController
         format.json { render action: 'create', status: :created, location: @line }
         format.js   { render action: 'create', status: :created, location: @line }
       else
-        format.json { render json: @line.errors, status: :unprocessable_entity }
-        format.js { render json: @line.errors, status: :unprocessable_entity } # this also has action: 'create', so it sends create.js.haml to the DOM
+        format.json { render json: { model: 'line', error: @line.errors}, status: :unprocessable_entity }
+        format.js { render json: { model: 'line', error: @line.errors}, status: :unprocessable_entity }
       end
 		end
 	end
@@ -32,6 +32,7 @@ class LinesController < ApplicationController
 		@arcs = @line.arcs
 		@entities = @line.entities
 		@tags = current_user.tags
+		gon.tags = @tags.all.collect(&:name)
 	end
 
 	def events_data

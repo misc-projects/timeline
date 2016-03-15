@@ -35,6 +35,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'haml'
 gem 'cocoon'
+gem 'gon'
 
 
 group :development, :test do

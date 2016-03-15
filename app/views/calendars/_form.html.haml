@@ -4,19 +4,19 @@
 			%input{type: "checkbox", id: "accordion-checkbox-1", name: "accordion-checkbox", class: "accordion-checkbox", checked: "checked"}
 			%label{for: "accordion-checkbox-1", class: "accordion-label"} Calendar details
 			.form-accordion-step-content
-				.form-accordion-step-fieldset
+				.form-fieldset
 					- # = f.label :abbrev
 					- # = f.text_field :abbrev
 					.field.field-block
 						= f.label :name, "Name:"
 						= f.text_field :name
 					.field
-						= f.label :leap, "Leap:"
 						= f.check_box :leap
+						= f.label :leap, "Leap:"
 					.field.disabled-field
 						- # add a JQuery or even inline JS to enable only if 'leap' checkbox is ticked
 						= f.label :leap_year_num, "Leap year interval:"
-						= f.number_field :leap_year_num
+						= f.number_field :leap_year_num, disabled: true
 					.button-container 
 						%button{type: "button", class: "option-button next-step-button"}
 							Next
@@ -24,7 +24,7 @@
 			%input{type: "checkbox", id: "accordion-checkbox-2", name: "accordion-checkbox", class: "accordion-checkbox"}
 			%label{for: "accordion-checkbox-2", class: "accordion-label"} Eras
 			.form-accordion-step-content
-				.form-accordion-step-fieldset
+				.form-fieldset
 					#eras
 						= f.fields_for :eras do |era|
 							= render 'era_fields', f: era
@@ -40,7 +40,7 @@
 			%input{type: "checkbox", id: "accordion-checkbox-3", name: "accordion-checkbox", class: "accordion-checkbox"}
 			%label{for: "accordion-checkbox-3", class: "accordion-label"} Months
 			.form-accordion-step-content
-				.form-accordion-step-fieldset
+				.form-fieldset
 					.simple-months{class: ("hidden" unless @calendar.new_record?)}
 						.field.field-block
 							= f.label :months_in_year, "Number of months:"
@@ -76,7 +76,7 @@
 			%input{type: "checkbox", id: "accordion-checkbox-4", name: "accordion-checkbox", class: "accordion-checkbox"}
 			%label{for: "accordion-checkbox-4", class: "accordion-label"} Weekdays
 			.form-accordion-step-content
-				.form-accordion-step-fieldset
+				.form-fieldset
 					.field
 						= f.label :week_length, "Number of days in a week:"
 						= f.number_field :week_length

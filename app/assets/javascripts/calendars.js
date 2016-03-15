@@ -1,31 +1,44 @@
 $(document).ready(function() {
 
+	$("body").on('change', "input[name='calendar[leap]']", function() {
+		if ($(this).is(':checked')) {
+            $("input[name='calendar[leap_year_num]']").prop('disabled', false);
+            $("input[name='calendar[leap_year_num]']").parent('.field').animate({'opacity': 1});
+        } else {
+        	$("input[name='calendar[leap_year_num]']").prop('disabled', true);
+        	$("input[name='calendar[leap_year_num]']").parent('.field').animate({'opacity': 0.3});
+        }
+	});
+
 	function monthFields() {
 		var ndays = $("#calendar_days_in_month").val()
 
 
 		$("body").on('click', "#populate-month-button", function() {
+			var input = $("#calendar_months_in_year")
+			if (input.value === "" | input.value === undefined) {
+				input.addClass('has-error')
+				input.nextAll('.error-message').remove();
+        		input.after('<div class="error-message">need at least 1 month</div>');
+			} else {
+				console.log(input.value)
+				$("#months").removeClass("hidden");
+				$(".simple-months").addClass("hidden");
 
-			console.log("inside populate action")
+				// clear out previous months
+				$(".remove-month-link").trigger("click");
+				
+				// adding empty month fields
+				var nmonth = $("#calendar_months_in_year").val();
+				ndays = $("#calendar_days_in_month").val();
 
-			$("#months").removeClass("hidden");
-			$(".simple-months").addClass("hidden");
-
-			// clear out previous months
-			$(".remove-month-link").trigger("click");
-			
-			// adding empty month fields
-			var nmonth = $("#calendar_months_in_year").val();
-			ndays = $("#calendar_days_in_month").val();
-
-			for (var i = 0; i < nmonth; i++) {
-				$(".add-month-link").trigger("click");
+				for (var i = 0; i < nmonth; i++) {
+					$(".add-month-link").trigger("click");
+				};
 			};
-
 		});		
 
 		$("body").on('click', "#reset-month-button", function() {
-
 			// clear out all months
 			$(".remove-month-link").trigger("click");
 
@@ -35,20 +48,6 @@ $(document).ready(function() {
 			
 		});
 
-		$('.sortable-container').sortable({ 
-
-		 	items: '.sortable',
-
-	        update: function(e, ui) {
-	            // ui.item.sortable is the model but it is not updated until after update
-	            var oldIndex = ui.item.sortable.index;
-	            // new Index because the ui.item is the node and the visual element has been reordered
-	            var newIndex = ui.item.index();
-
-	            numberMonths()
-	        }    
-		});
-	
 		// filling fields, month number and day
 		function numberMonths() {
 			$(".month-number-field").each(function( index ) {
@@ -56,11 +55,7 @@ $(document).ready(function() {
 			});
 
 			$(".month-day-field").val(ndays);
-
 			$(".month-number-field").attr('readonly', true);
-			// $(".month-number-field").focus(function () {
-            //    $(this).blur();
-            // });
 		};
 
 		// reorder months after remove and insertion

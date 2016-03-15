@@ -103,11 +103,11 @@ tbody.collapse.in {
      transition-timing-function: ease;
 }
 .modal-open {
-  overflow: hidden;
+  overflow: auto;
 }
 .modal {
   display: none;
-  overflow: hidden;
+  overflow: auto;
   position: fixed;
   top: 0;
   right: 0;

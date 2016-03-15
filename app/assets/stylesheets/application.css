@@ -10,7 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require jqueryui/jquery-ui
+ *= require jquery-ui
  *= require tag-it/jquery.tagit
  *= require form
  *= require_tree .
@@ -18,3 +18,18 @@
  */
 
 
+/* fix for jQuery autocomplete hiding behind modal */
+.ui-autocomplete { 
+	z-index:2147483647; 
+}
+
+/* Bootstrap modal positioning */
+@media (min-width: 768px) {
+	.modal-dialog {
+	    margin: 50px auto;
+	  }
+	}
+
+.scroll {
+	
+}
