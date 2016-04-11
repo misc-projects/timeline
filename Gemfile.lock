@@ -80,6 +80,9 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
+    js-routes (1.2.5)
+      railties (>= 3.2)
+      sprockets-rails
     json (1.8.3)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -175,6 +178,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
+  js-routes
   pg
   rails (= 4.2.3)
   sass-rails (~> 5.0)

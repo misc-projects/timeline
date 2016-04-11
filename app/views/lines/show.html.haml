@@ -1,5 +1,9 @@
-<svg id="timeline"></svg>
+%svg#timeline
 
 = link_to 'New Event', new_line_event_path(@line.id), remote: true
 
 #form-modal.modal.fade
+
+- # TODO: investigate security issues
+:javascript
+	window.line_path = '#{j line_path}'

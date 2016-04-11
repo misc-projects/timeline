@@ -12,7 +12,7 @@ class EventsController < ApplicationController
 	def create
 		@line = Line.find(params[:line_id])
 		@event = @line.events.new(event_params)
-		
+
 		respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'event was successfully created.' }

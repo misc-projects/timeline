@@ -1,4 +1,4 @@
-.form-container.accordion-container
+.form-container.accordion-container#event-form
 	= form_for [@line, Event.new], data: {remote: true}, html: {class: "form-sections-container"} do |f|
 		.form-accordion-step
 			%input{type: "checkbox", id: "accordion-checkbox-1", name: "accordion-checkbox", class: "accordion-checkbox", checked: "checked"}

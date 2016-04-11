@@ -24,6 +24,7 @@ class Event < ActiveRecord::Base
   validates :start_year, presence: true
 
   after_validation :check_dates
+  after_save :update_line
 
   def start_era_id=(id)
   	era = Era.find(id)
@@ -82,6 +83,11 @@ class Event < ActiveRecord::Base
         
       end
 
+    end
+
+  
+    def update_line
+      self.line.touch
     end
 
 end

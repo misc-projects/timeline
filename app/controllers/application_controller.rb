@@ -8,4 +8,5 @@ class ApplicationController < ActionController::Base
   def set_current_user
   	Event.current_user = current_user
 	end
+
 end

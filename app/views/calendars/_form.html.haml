@@ -12,7 +12,7 @@
 						= f.text_field :name
 					.field
 						= f.check_box :leap
-						= f.label :leap, "Leap:"
+						= f.label :leap, "Calendar has leap years"
 					.field.disabled-field
 						- # add a JQuery or even inline JS to enable only if 'leap' checkbox is ticked
 						= f.label :leap_year_num, "Leap year interval:"

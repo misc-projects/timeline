@@ -41,6 +41,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 */
 
+
+// TODO: responsive design
 #months {
 	.field {
 		margin: 0;
@@ -62,6 +64,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 			&.month-name-field[type="text"] {
 				border-radius: 0px 3px 3px 0px;
+				width: 300px; // media > 768
 			}
 
 		}
@@ -77,6 +80,21 @@ input[type=number]::-webkit-outer-spin-button {
 		li {
 			display: inline-block;
 			list-style: none;
+		}
+	}
+
+	.nested-fields {
+		position: relative;
+	}
+
+	// TODO: change colour to red on hover?
+	.remove-month-link img {
+		position: relative;
+		top: 7px;
+		opacity: 0.1;
+
+		&:hover {
+			opacity: 1;    		
 		}
 	}
 

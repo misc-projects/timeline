@@ -13,5 +13,5 @@
 	.field.field-inline
 		-#= f.label :days_leap, "Number of days in leap year:"
 		= f.number_field :days_leap, class: "month-leap-field"
-	= link_to_remove_association "--", f, class: "remove-month-link"
+	= link_to_remove_association image_tag('ic_remove_circle_black_24px.svg'), f, class: "remove-month-link"
 	-# replace "--" with: image_tag('remove_month.png')

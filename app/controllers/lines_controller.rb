@@ -25,7 +25,7 @@ class LinesController < ApplicationController
       end
 		end
 	end
-	
+
 	def show
 		@line = Line.find(params[:id])
 		@events = @line.events
@@ -33,27 +33,13 @@ class LinesController < ApplicationController
 		@entities = @line.entities
 		@tags = current_user.tags
 		gon.tags = @tags.all.collect(&:name)
-	end
+		# gon.events = events_jsonify(@events)
 
-	def events_data
 		respond_to do |format|
-     	format.json { render json: events_jsonify }
-   	end
-			# ID - year - name
+			format.html
+			format.json { render json: events_jsonify(@events) }
+		end
 	end
-
-
-=begin
-this will connect to the d3.js AJAX request
-
-	def data
-		respond_to do |format|
-      format.json {
-        render json:  @line.to_json(include: { event: { only: [:name, :summary] }})
-      }
-    end
-	end
-=end
   
 	def destroy
 		@line.destroy
@@ -62,20 +48,22 @@ this will connect to the d3.js AJAX request
 
 	private
 
-
-		def events_jsonify
-			# need event
-			# @events
-			#     t.integer  "start_year"
-    	# 		t.integer  "end_year"
-    	# 		t.integer  "start_month"
-    	# 		t.integer  "end_month"
-    	# 		t.integer  "start_date"
-    	# 		t.integer  "end_date"
-		end
-
 		def line_params
 			params.require(:line).permit(:name, :calendar_id)
+		end
+
+		def events_jsonify(events)
+			events.collect do |event|
+				{ id: event.id,
+					name: event.name,
+					summary: event.summary,
+					start_year: event.start_year,
+					end_year: event.end_year,
+					start_month: event.start_month,
+					end_month: event.end_month,
+					start_date: event.start_date,
+					end_date: event.end_date }
+			end.to_json
 		end
 		
 end

@@ -37,6 +37,8 @@ gem 'haml'
 gem 'cocoon'
 gem 'gon'
 
+# To access routes in JS
+gem "js-routes"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,4 +1,4 @@
-.nested-fields
+.table-fields
 	.field.field-inline
 		= f.number_field :number
 	.field.field-inline
@@ -11,6 +11,6 @@
 		= f.label :anchor, "Start year:"
 		= f.number_field :anchor
 	.field
-		= f.label :direction, "Ascending?"
 		= f.check_box :direction
+		= f.label :direction, "Years follow chronological order"
 	= link_to_remove_association "remove era", f

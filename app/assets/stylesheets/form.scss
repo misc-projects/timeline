@@ -126,11 +126,13 @@ $field-heading-text: #8a92a5;
 	}
 	.field input[type="checkbox"]:not(:checked) + label,
 	.field input[type="checkbox"]:checked + label {
+
+		padding-left: 25px;
 		&:before {
 			content: '';
 			position: absolute;
 			width: 17px; height: 17px;
-			left: 75px;
+			left: 30px;
 			border: 1px solid $background-soft-blue;
 			background: $field-background;
 			transition: all .2s;			
@@ -139,7 +141,7 @@ $field-heading-text: #8a92a5;
 		&:after {
 			content: '✔';
 			position: absolute;
-			left: 77px;
+			left: 32px;
 			font-size: 18px;
 			line-height: 1;
 			color: $background-bright-blue;
@@ -157,6 +159,11 @@ $field-heading-text: #8a92a5;
 		border: 1px solid $background-blue;
 		outline: $background-blue auto 5px;
 		outline-offset: -2px;
+	}
+
+	.table-fields {
+		width: 100%;
+		
 	}
 
 	.back-step-button {

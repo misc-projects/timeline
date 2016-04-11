@@ -16,12 +16,12 @@ $(document).ready(function() {
 
 		$("body").on('click', "#populate-month-button", function() {
 			var input = $("#calendar_months_in_year")
-			if (input.value === "" | input.value === undefined) {
+			if (!input.val()) {
 				input.addClass('has-error')
 				input.nextAll('.error-message').remove();
         		input.after('<div class="error-message">need at least 1 month</div>');
 			} else {
-				console.log(input.value)
+				console.log(input.val())
 				$("#months").removeClass("hidden");
 				$(".simple-months").addClass("hidden");
 
