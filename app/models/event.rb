@@ -3,13 +3,13 @@ class Event < ActiveRecord::Base
   belongs_to :line, inverse_of: :events
 
   has_many :arcs, through: :arc_events
-  has_many :arc_events
+  has_many :arc_events, dependent: :destroy
 
   has_many :entities, through: :entity_events
-  has_many :entity_events
+  has_many :entity_events, dependent: :destroy
 
   has_many :tags, through: :event_tags
-  has_many :event_tags
+  has_many :event_tags, dependent: :destroy
 
   accepts_nested_attributes_for :arcs, :entities, :tags,
                                 :arc_events, :entity_events, :event_tags
@@ -24,6 +24,7 @@ class Event < ActiveRecord::Base
   validates :start_year, presence: true
 
   after_validation :check_dates
+  before_save :save_end_date
   after_save :update_line
 
   def start_era_id=(id)
@@ -47,6 +48,8 @@ class Event < ActiveRecord::Base
   # TODO LEAP YEARS
     def check_dates
       calendar = Line.find(self.line_id).calendar
+
+      # check empty fields
       if self.start_month.nil? 
         unless self.start_date.nil?
           errors.add(:start_date, "can't be filled if month is empty")
@@ -71,20 +74,43 @@ class Event < ActiveRecord::Base
         if self.end_year.nil?
           errors.add(:end_month, "can't be filled if year is empty")
           errors.add(:end_year, "must not be empty")
+        else
+          if self.end_year < self.start_year
+            errors.add(:end_year, "can't precede start year")
+          end
         end
 
         if self.end_month <= calendar.months.count
-          unless self.end_date <= max_days = calendar.months.find_by(number: self.end_month).days_normal
-            errors.add(:end_date, "can't exceed number of days in the month (#{max_days})")
+          if self.end_month < self.start_month
+            errors.add(:end_month, "can't precede start month")
+          end
+
+          unless self.end_date.nil?
+            if self.end_date > max_days = calendar.months.find_by(number: self.end_month).days_normal
+              errors.add(:end_date, "can't exceed number of days in the month (#{max_days})")
+            else
+              if self.end_date < self.start_date
+                errors.add(:end_date, "can't precede start date")
+              end
+            end
           end
         else
           errors.add(:end_month, "can't be greater than number of months (#{calendar.months.count})")
         end
         
       end
-
     end
 
+    def save_end_date
+      if self.end_year.nil?
+        self.end_year = self.start_year
+        self.end_month = self.start_month
+        self.end_date = self.start_date
+      else
+        self.end_month = 1
+        self.end_date = 1
+      end
+    end
   
     def update_line
       self.line.touch

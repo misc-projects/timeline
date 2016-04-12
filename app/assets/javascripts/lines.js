@@ -14,8 +14,25 @@ $(document).ready(function() {
       }        
     });
 
+
+    /* DATA FORMAT
+      array of events as JSON objects
+        [{event_json), {}, ...]
+      */
+
+
+    /* TODO
+          map date to y-axis
+          map arcs to x-axis if option selected?
+          */
+
+
     function addEventToTimeline() {
       // D3 MAGIC (add node to data, etc)
+    };
+
+    function showEventDetail() {
+      // show details on hover
     };
 
     $(document).on("ajax:success", "#event-form", function(status, data, xhr){

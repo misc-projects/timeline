@@ -45,24 +45,23 @@ class LinesController < ApplicationController
 		@line.destroy
 	end
 
-
 	private
 
 		def line_params
 			params.require(:line).permit(:name, :calendar_id)
 		end
 
+		# TODO security of interpolation?
 		def events_jsonify(events)
 			events.collect do |event|
 				{ id: event.id,
 					name: event.name,
 					summary: event.summary,
-					start_year: event.start_year,
-					end_year: event.end_year,
-					start_month: event.start_month,
-					end_month: event.end_month,
-					start_date: event.start_date,
-					end_date: event.end_date }
+					start_era: event.start_era,
+					start_date: "#{event.start_date or 0}/#{event.start_month or 0}/#{event.start_year}",
+					end_date: "#{event.end_date or 0}/#{event.end_month or 0}/#{event.end_year or event.start_year}",
+					arcs: event.arcs,
+					entities: event.entities }
 			end.to_json
 		end
 		
